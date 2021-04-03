@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::view('/', 'welcome');
 Route::get('/test', function () {
-    // Applications
+    //Applications
     $portfolio = \App\Models\Application::create([
         "name" => "Portfolio Site"
     ]);
@@ -40,10 +40,24 @@ Route::get('/test', function () {
         "password" => "appletree734"
     ]);
     $user->roles()->attach($tenant->roles->where('application_guid', '=', $portfolio->guid)->first());
-    
+
+
     dd([
         "Tenant" => $tenant->with('applications')->with('users')->with('roles')->first()->toArray(),
         "User" => $user->with('tenants')->with('roles')->first()->toArray(),
-        "Applications" => \App\Models\Application::with('permissions')->get()->toArray()
+        "Applications" => \App\Models\Application::with('permissions')->get()->toArray(),
+        "Application Client" => $portfolio->client
     ]);
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/applications', function () {
+    $application = \App\Models\Application::first();
+    dd($application->client);
 });

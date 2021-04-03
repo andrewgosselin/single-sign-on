@@ -9,10 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Utilities\Guid;
 use App\Models\Tenant;
 use App\Models\Role;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     protected $table = "users";
     protected $primaryKey = "guid";

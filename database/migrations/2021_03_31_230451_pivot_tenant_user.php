@@ -28,6 +28,6 @@ class PivotTenantUser extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tenant_user');
     }
 }

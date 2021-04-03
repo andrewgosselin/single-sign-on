@@ -28,6 +28,6 @@ class PivotApplicationTenant extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('application_tenant');
     }
 }

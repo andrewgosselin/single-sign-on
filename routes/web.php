@@ -51,6 +51,11 @@ Route::get('/test', function () {
 });
 
 
+Route::get('/logout', function () {
+    session()->flush();
+    return redirect('/login');
+});
+
 
 Auth::routes();
 

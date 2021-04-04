@@ -49,6 +49,9 @@ class User extends Authenticatable
         self::creating(function ($model) {
             $model->guid = Guid::generate();
         });
+        self::retrieved(function($model) {
+            $model->with('tenants');
+        });
     }
 
     public function getAuthorizedAttribute() {

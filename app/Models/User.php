@@ -75,7 +75,11 @@ class User extends Authenticatable
         if($tenant->count() > 0) {
             return $tenant->first();
         } else {
-            return false;
+            if(config('application.general.multiTenant')) {
+                abort(404, "This SSO is in multitenant mode and you are not assigned to a tenant. Contact an adminstrator.");
+            } else {
+                return \App\Models\Tenant::getBaseTenant();
+            }
         }
     } 
 

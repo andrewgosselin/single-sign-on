@@ -26,8 +26,10 @@ class Tenant extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $guid = Guid::generate();
-            $model->guid = $guid;
+            if(!isset($model->guid)) {
+                $guid = Guid::generate();
+                $model->guid = $guid;
+            }
         });
     }
 
@@ -57,5 +59,20 @@ class Tenant extends Model
         return $role;
     }
 
-
+    public static function getBaseTenant() {
+        $tenant = self::where('guid', '=', '-1');
+        if($tenant->count() > 0) {
+            $tenant = $tenant->first();
+        } else {
+            $tenant = self::create([
+                "guid" => "-1",
+                "name" => "test"
+            ]);
+        }
+        if($tenant->name !== config('application.general.baseName')) {
+            $tenant->name = config('application.general.baseName');
+            $tenant->save();
+        }
+        return $tenant;   
+    }
 }

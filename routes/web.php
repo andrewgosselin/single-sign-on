@@ -12,7 +12,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/', 'welcome');
+Route::get('/', function () {
+    $logged = \Auth::check();
+    if($logged) {
+        return redirect('/dashboard');
+    } else {
+        return view('welcome');
+    }
+});
+
 Route::get('/test', function () {
     //Applications
     $portfolio = \App\Models\Application::create([
@@ -59,10 +67,56 @@ Route::get('/logout', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::view('/dashboard', 'pages.dashboard')->name('dashboard');
 
 Route::get('/applications', function () {
+    $applications = \App\Models\Application::all();
+    return view('pages.applications.index')
+        ->with('applications', $applications);
+});
+
+
+Route::get('/tenants', function () {
     $application = \App\Models\Application::first();
     dd($application->client);
+});
+Route::get('/tenant', function () {
+    $application = \App\Models\Application::first();
+    dd($application->client);
+});
+
+Route::get('/profile', function () {
+    $user = \Auth::user();
+    return view('pages.users.profile')
+        ->with('editable', true)
+        ->with('user', $user);
+});
+Route::get('/users', function () {
+    if(!config('application.general.multiTenant')) {
+        $users = \App\Models\User::paginate(5);
+    } else {
+        $tenant = \Auth::user()->tenant;
+        $users = $tenant->users->paginate(5);
+    }
+    return view('pages.users.index')
+        ->with('users', $users);
+});
+
+Route::get('/users/{guid}', function ($guid) {
+    if(config('application.general.multiTenant')) {
+        $user = \Auth::user()->tenant->users->where("guid", '=', $guid);
+    } else {
+        $user = \App\Models\User::where("guid", '=', $guid);
+    }
+    
+    if($user->count() > 0) {
+        $user = $user->first();
+    } else {
+        abort(404, "User not found.");
+    }
+    $editable = ($guid == \Auth::user()->guid); // TODO: Check permission for editing users in tenant.
+    return view('pages.users.profile')
+        ->with('editable', $editable)
+        ->with('user', $user);
 });

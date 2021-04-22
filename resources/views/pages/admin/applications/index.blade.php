@@ -16,7 +16,8 @@
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Roles</th>
+                            <th scope="col">Client ID</th>
+                            <th scope="col">Client Secret</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -27,10 +28,13 @@
                                 {{$application->name}}
                                 </td>
                                 <td>
-                                {{$application->roles->count()}}
+                                {{$application->client->id}}
+                                </td>
+                                <td>
+                                {{$application->client->secret}}
                                 </td>
                                 <td class="text-right">
-                                    <a type="button" class="btn btn-primary btn-sm" href="/applications/{{$application->guid}}">View</a>
+                                    <a type="button" class="btn btn-primary btn-sm" href="/admin/applications/{{$application->guid}}">View</a>
                                     <a type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         Options
                                     </a>

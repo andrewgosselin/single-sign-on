@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="overflow-x: hidden;">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,6 +70,13 @@
     </li>
   </ul>
 </header>
+<header class="navbar sub sticky-top bg-transparent flex-md-nowrap p-0 shadow">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="#" onclick="window.history.back();">Back</a>
+    </li>
+  </ul>
+</header>
 
 <div class="container-fluid">
   <div class="row">
@@ -90,10 +97,11 @@
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          @if(config('application.general.multiTenant'))
           <span>Tenant Settings</span>
-          <a class="link-secondary" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
+          @else
+          <span>Settings</span>
+          @endif
         </h6>
         <ul class="nav flex-column mb-2">
           <!-- <li class="nav-item">
@@ -107,15 +115,39 @@
               <span data-feather="file-text"></span>
               Branding
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('applications')) ? 'active' : '' }}" href="/applications">
+            <a class="nav-link {{ (request()->is('applications*')) ? 'active' : '' }}" href="/applications">
               <span data-feather="file-text"></span>
               Applications
             </a>
-          </li> -->
+          </li>
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('users')) ? 'active' : '' }}" href="/users">
+            <a class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}" href="/users">
+              Users
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Administration</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('admin/tenants*')) ? 'active' : '' }}" href="/admin/tenants">
+              <span data-feather="file-text"></span>
+              Tenants
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('admin/applications*')) ? 'active' : '' }}" href="/admin/applications">
+              <span data-feather="file-text"></span>
+              Applications
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('admin/users*')) ? 'active' : '' }}" href="/admin/users">
+              <span data-feather="file-text"></span>
               Users
             </a>
           </li>

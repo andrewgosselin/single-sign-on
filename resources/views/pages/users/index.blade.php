@@ -44,7 +44,7 @@
                                     <a type="button" class="btn btn-primary btn-sm" href="/users/{{$user->guid}}">View</a>
                                     <a type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         Options
-</a>
+                                    </a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">Terminate</a></li>
                                     </ul>

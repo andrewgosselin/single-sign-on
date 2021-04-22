@@ -13,6 +13,7 @@ body {
    */
   
   .sidebar {
+    background-color: #f8f9fe !important;
     position: fixed;
     top: 0;
     /* rtl:raw:
@@ -99,3 +100,31 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
   
+
+    /*
+   * Navbar SUB
+   */
+  
+  .navbar.sub .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: transparent;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+
+@media (min-width: 576px) {
+  .navbar.sub {
+    margin-left: 0% !important;
+  }
+}
+@media (min-width: 768px) {
+  .navbar.sub {
+    margin-left: 25% !important;
+  }
+}
+@media (min-width: 992px) {
+  .navbar.sub {
+    margin-left: 16.6% !important;
+  }
+}

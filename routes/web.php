@@ -36,6 +36,8 @@ Route::get('/applications/{guid}', 'App\Http\Controllers\ApplicationController@v
 
 Route::get('/tenant', 'App\Http\Controllers\TenantController@tenant'); // TODO
 
+Route::get('/dictionary', 'App\Http\Controllers\DictionaryController@index');
+
 Route::get('/profile', 'App\Http\Controllers\UserController@profile');
 Route::get('/users', 'App\Http\Controllers\UserController@index');
 Route::get('/users/{guid}', 'App\Http\Controllers\UserController@view');

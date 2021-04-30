@@ -42,7 +42,10 @@ class AdminController extends Controller
     }
 
     public function tenants_index() {
-        $application = \App\Models\Application::first();
-        dd($application->client);
+        $tenants = \App\Models\Tenant::paginate(5);
+        $editable = true; // TODO: Check permission for editing application.
+        return view('pages.admin.tenants.index')
+            ->with('editable', $editable)
+            ->with('tenants', $tenants);
     }
 }

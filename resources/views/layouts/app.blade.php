@@ -104,13 +104,13 @@
           @endif
         </h6>
         <ul class="nav flex-column mb-2">
-          <!-- <li class="nav-item">
-            <a class="nav-link {{ (request()->is('dictionary')) ? 'active' : '' }}" href="/dictionary">
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('dictionary*')) ? 'active' : '' }}" href="/dictionary">
               <span data-feather="file-text"></span>
               Dictionary
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link {{ (request()->is('branding')) ? 'active' : '' }}" href="/branding">
               <span data-feather="file-text"></span>
               Branding
@@ -133,11 +133,13 @@
           <span>Administration</span>
         </h6>
         <ul class="nav flex-column mb-2">
+          @if(config('application.general.multiTenant'))
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('admin/tenants*')) ? 'active' : '' }}" href="/admin/tenants">
               <span data-feather="file-text"></span>
               Tenants
             </a>
+            @endif
           </li>
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('admin/applications*')) ? 'active' : '' }}" href="/admin/applications">

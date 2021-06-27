@@ -30,7 +30,7 @@ class Application extends Model
         self::creating(function ($model) {
             $guid = Guid::generate();
             $model->guid = $guid;
-            $auth_client = \App\Models\Utilities\OAuthClient::create(0, $model->name, $model->url . "/callback");
+            $auth_client = \App\Models\Utilities\OAuthClient::create(0, $model->name, $model->url . "/auth/callback");
             $model->auth_client_id = $auth_client->id;
         });
     }

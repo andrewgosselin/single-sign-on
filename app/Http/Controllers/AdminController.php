@@ -35,7 +35,6 @@ class AdminController extends Controller
         } else {
             abort(404, "Application not found.");
         }
-        // dd($application->getClientAttribute());
         $editable = true; // TODO: Check permission for editing application.
         return view('pages.admin.applications.view')
             ->with('editable', $editable)

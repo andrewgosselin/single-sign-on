@@ -44,10 +44,9 @@ class CreateApplication extends Command
         $this->line('=======================================');
         $this->line('SSO Application created successfully.');
         $this->line('-----------------------------------------');
-        $this->line('ID: ' . $application->id);
         $this->line('Client ID: ' . $application->client->id);
         $this->line('Client Secret: ' . $application->client->secret);
-        $this->line('Client Callback: ' . $application->client->callback);
+        $this->line('Client Callback: ' . $application->client->redirect);
         $this->line('=======================================');
         return 0;
     }

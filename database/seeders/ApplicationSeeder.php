@@ -13,6 +13,9 @@ class ApplicationSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $app = \App\Models\Application::create([
+            "name" => "Test Application",
+            "url" => "https://authdemo.cyrexag.com"
+        ]);
     }
 }

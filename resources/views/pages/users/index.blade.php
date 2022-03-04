@@ -41,7 +41,7 @@
                                     {{$user->email}}
                                 </td>
                                 <td class="text-right">
-                                    <a type="button" class="btn btn-primary btn-sm" href="/users/{{$user->guid}}">View</a>
+                                    <a type="button" class="btn btn-primary btn-sm" href="/users/{{$user->id}}">View</a>
                                     <a type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         Options
                                     </a>

@@ -1,24 +1,15 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h4>{{ __('Dashboard') }}</h4>
+    </x-slot>
 
-@section('content')
-<div class="container pt-3">
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card shadow">
-                <div class="card-header">
-                    <h3 class="mb-0">Dashboard</h3>
-                </div>
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in! You should be automatically logged into any site implementing this SSO!') }}
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    You're logged in!
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-app-layout>

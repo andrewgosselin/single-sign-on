@@ -16,8 +16,8 @@ class PivotApplicationTenant extends Migration
         Schema::create('application_tenant',function(Blueprint$table)
         {
              $table->bigIncrements('id');
-             $table->integer('application_guid');
-             $table->integer('tenant_guid');
+             $table->string('application_guid');
+             $table->string('tenant_guid');
         });
     }
 

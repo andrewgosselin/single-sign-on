@@ -16,8 +16,8 @@ class PivotRoleUser extends Migration
         Schema::create('role_user',function(Blueprint$table)
         {
              $table->bigIncrements('id');
-             $table->integer('role_guid');
-             $table->integer('user_guid');
+             $table->string('role_guid');
+             $table->string('user_guid');
         });
     }
 

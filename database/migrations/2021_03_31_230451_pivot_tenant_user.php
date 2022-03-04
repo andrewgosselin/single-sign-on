@@ -17,7 +17,7 @@ class PivotTenantUser extends Migration
         {
              $table->bigIncrements('id');
              $table->integer('tenant_guid');
-             $table->integer('user_guid');
+             $table->integer('user_id');
         });
     }
 

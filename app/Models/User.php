@@ -16,9 +16,6 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens;
 
     protected $table = "users";
-    protected $primaryKey = "guid";
-    protected $keyType = "string";
-    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +23,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'guid',
         'first_name',
         'last_name',
         'email',
@@ -46,9 +42,9 @@ class User extends Authenticatable
     public static function boot()
     {
         parent::boot();
-        self::creating(function ($model) {
-            $model->guid = Guid::generate();
-        });
+        // self::creating(function ($model) {
+        //     $model->guid = Guid::generate();
+        // });
         self::retrieved(function($model) {
             $model->with('tenants');
         });

@@ -16,18 +16,18 @@ class UserController extends Controller
         return view('pages.users.index')
             ->with('users', $users);
     }
-    public function view($guid) {
+    public function view($id) {
         if(config('application.general.multiTenant')) {
-            $user = \Auth::user()->tenant->users->where("guid", '=', $guid);
+            $user = \Auth::user()->tenant->users->where("id", '=', $id);
         } else {
-            $user = \App\Models\User::where("guid", '=', $guid);
+            $user = \App\Models\User::where("id", '=', $id);
         }
         if($user->count() > 0) {
             $user = $user->first();
         } else {
             abort(404, "User not found.");
         }
-        $editable = ($guid == \Auth::user()->guid); // TODO: Check permission for editing users in tenant.
+        $editable = ($id == \Auth::user()->id); // TODO: Check permission for editing users in tenant.
         return view('pages.users.view')
             ->with('editable', $editable)
             ->with('user', $user);

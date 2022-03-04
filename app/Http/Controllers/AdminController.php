@@ -11,14 +11,14 @@ class AdminController extends Controller
         return view('pages.admin.users.index')
             ->with('users', $users);
     }
-    public function users_view($guid) {
-        $user = \App\Models\User::where("guid", '=', $guid);
+    public function users_view($id) {
+        $user = \App\Models\User::where("id", '=', $id);
         if($user->count() > 0) {
             $user = $user->first();
         } else {
             abort(404, "User not found.");
         }
-        $editable = ($guid == \Auth::user()->guid); // TODO: Check permission for editing users in tenant.
+        $editable = ($id == \Auth::user()->id); // TODO: Check permission for editing users in tenant.
         return view('pages.admin.users.view')
             ->with('editable', $editable)
             ->with('user', $user);

@@ -104,12 +104,6 @@
           @endif
         </h6>
         <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link {{ (request()->is('dictionary*')) ? 'active' : '' }}" href="/dictionary">
-              <span data-feather="file-text"></span>
-              Dictionary
-            </a>
-          </li>
           <!-- <li class="nav-item">
             <a class="nav-link {{ (request()->is('branding')) ? 'active' : '' }}" href="/branding">
               <span data-feather="file-text"></span>

@@ -1,15 +1,19 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h4>{{ __('Dashboard') }}</h4>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+@section('content')
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-lg-4 col-md-3 col-6" style="margin-bottom:10px;">
+            <div class="card bg-dark text-white" style="height: 300px;">
+                {{-- <img src="..." class="card-img" alt="..."> --}}
+                <div class="card-img-overlay">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection
+
+

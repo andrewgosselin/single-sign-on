@@ -12,6 +12,10 @@ use Nyholm\Psr7\Response as Psr7Response;
 use Laravel\Passport\Http\Controllers\ConvertsPsrResponses;
 use Laravel\Passport\Http\Controllers\RetrievesAuthRequestFromSession;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+
 class LoginController extends Controller
 {
     use ConvertsPsrResponses, RetrievesAuthRequestFromSession;

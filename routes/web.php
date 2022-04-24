@@ -42,18 +42,26 @@ Route::get('/oauth/callback', function () {
         abort(404);
     }
     $githubUser = Socialite::driver(request()->get("type"))->user();
- 
-    $user = User::updateOrCreate([
-        'github_id' => $githubUser->id,
-    ], [
-        'name' => $githubUser->name,
-        'email' => $githubUser->email,
-        'github_token' => $githubUser->token,
-        'github_refresh_token' => $githubUser->refreshToken,
-    ]);
+    $user = User::where("email", $githubUser->email)->first();
+    if($user) {
+        $user->update([
+            "github_id" => $githubUser->id
+        ]);
+    } else {
+        return redirect("/register");
+    }
+    // $user = User::updateOrCreate([
+    //     'github.id' => $githubUser->id,
+    // ], [
+    //     'name' => $githubUser->name,
+    //     'email' => $githubUser->email,
+    //     // 'github_token' => $githubUser->token,
+    //     // 'github_refresh_token' => $githubUser->refreshToken,
+    // ]);
  
     Auth::login($user);
-    dd(request()->all());
+
+    return redirect("/home");
 });
 
 // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

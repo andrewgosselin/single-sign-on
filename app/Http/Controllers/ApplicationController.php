@@ -34,4 +34,21 @@ class ApplicationController extends Controller
             ->with('editable', $editable)
             ->with('application', $application);
     }
+
+    public function store() {
+        $tenant = \Auth::user()->tenant;
+        $applications = $tenant->applications;
+    }
+
+    public function update() {
+        $tenant = \Auth::user()->tenant;
+        $applications = $tenant->applications;
+        $application = $applications->where("guid", '=', $guid);
+        
+        if($application->count() > 0) {
+            $application = $application->first();
+        } else {
+            abort(404, "Application not found.");
+        }
+    }
 }

@@ -35,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/applications', 'App\Http\Controllers\ApplicationController@index');
     Route::get('/applications/{guid}', 'App\Http\Controllers\ApplicationController@view');
+
+    // Route::post('/applications', 'App\Http\Controllers\ApplicationController@store');
+    // Route::put('/applications/{guid}', 'App\Http\Controllers\ApplicationController@update');
     
     Route::get('/tenant', 'App\Http\Controllers\TenantController@tenant'); // TODO
     

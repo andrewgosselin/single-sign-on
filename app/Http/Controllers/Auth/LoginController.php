@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use League\OAuth2\Server\AuthorizationServer;
 use Nyholm\Psr7\Response as Psr7Response;
 use Laravel\Passport\Http\Controllers\ConvertsPsrResponses;
+use Laravel\Passport\Http\Controllers\RetrievesAuthRequestFromSession;
 
 class LoginController extends Controller
 {

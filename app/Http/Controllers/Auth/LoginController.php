@@ -82,12 +82,6 @@ class LoginController extends Controller
      
         Auth::login($user);
 
-        $this->assertValidAuthToken($request);
-
-        $authRequest = $this->getAuthRequestFromSession($request);
-
-        return $this->convertResponse(
-            $this->server->completeAuthorizationRequest($authRequest, new Psr7Response)
-        );
+        return $this->approveRequest(null, $user);
     }
 }

@@ -183,8 +183,8 @@
                 </div>
 
                 <button class="btn btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-                <hr class="my-4">
-                <a class="btn btn-github btn-block text-uppercase" href="/oauth/redirect?type=github"><i class="fab fa-github mr-2"></i> Sign in with Github</a>
+                {{-- <hr class="my-4">
+                <a class="btn btn-github btn-block text-uppercase" href="/oauth/redirect?type=github"><i class="fab fa-github mr-2"></i> Sign in with Github</a> --}}
                 {{-- <button class="btn btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> --}}
               </form>
             </div>

@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +31,30 @@ Route::get('/logout', function () {
 });
 
 Auth::routes();
+
+
+
+Route::get('/oauth/redirect', function () {
+    return Socialite::driver(request()->get('type'))->redirect();
+});
+Route::get('/oauth/callback', function () {
+    if(!in_array(request()->get("type"), ["github"])) {
+        abort(404);
+    }
+    $githubUser = Socialite::driver(request()->get("type"))->user();
+ 
+    $user = User::updateOrCreate([
+        'github_id' => $githubUser->id,
+    ], [
+        'name' => $githubUser->name,
+        'email' => $githubUser->email,
+        'github_token' => $githubUser->token,
+        'github_refresh_token' => $githubUser->refreshToken,
+    ]);
+ 
+    Auth::login($user);
+    dd(request()->all());
+});
 
 // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

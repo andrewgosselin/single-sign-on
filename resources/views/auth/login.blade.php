@@ -116,6 +116,33 @@
   }
 }
 
+    .branding {
+      text-align: center;
+      font-size: 18pt;
+      padding-bottom: 20px;
+    }
+    .branding img {
+      height: 150px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-form .form-label-group {
+      text-align: left;
+    }
+    .btn-github {
+      color: white;
+      background-color: gray;
+    }
+.btn-google {
+  color: white;
+  background-color: #ea4335;
+}
+
+.btn-facebook {
+  color: white;
+  background-color: #3b5998;
+}
     </style>
 @endsection
 
@@ -124,12 +151,15 @@
   <div class="row no-gutter">
     <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
     <div class="col-md-8 col-lg-6">
-      <div class="login d-flex align-items-center py-5">
+      <div class="login d-flex align-items-center">
         <div class="container">
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
-              <h3 class="login-heading mb-4">{{ __('Login') }}</h3>
-              <form method="POST" action="{{ route('login') }}">
+              <div class="branding">
+                <img src="{{$application["image"] ?? "https://cyrexag.com/assets/branding/logo.png"}}">
+                <p class="login-heading mb-4">{{ __('Logging into ') }}<b>{{ config('app.name', 'SSO') }}</b></p>
+              </div>
+              <form method="POST" action="{{ route('login') }}" class="login-form text-center">
                 @csrf
                 <div class="form-label-group">
                   <input type="email" id="inputEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -152,7 +182,10 @@
                     @enderror
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                <button class="btn btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                <hr class="my-4">
+                <a class="btn btn-github btn-block text-uppercase" href="/oauth/redirect?type=github"><i class="fab fa-github mr-2"></i> Sign in with Github</a>
+                {{-- <button class="btn btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> --}}
               </form>
             </div>
           </div>

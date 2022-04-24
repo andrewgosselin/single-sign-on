@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use League\OAuth2\Server\AuthorizationServer;
 use Nyholm\Psr7\Response as Psr7Response;
+use Laravel\Passport\Http\Controllers\ConvertsPsrResponses;
 
 class LoginController extends Controller
 {

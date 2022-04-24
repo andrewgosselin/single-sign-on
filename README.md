@@ -2,12 +2,12 @@
 
 ## Basic Overview
 
-A brief description of the project.
+**Warning: This application is not close to a stable version.**
+
+An open source Laravel based authentication server implementing OAuth 2.0 over users and APIs acrossed a network of websites and applications.
 
 <br>
 
 ## Links
 
-[Project's trello board](https://google.com) - This includes all of the future changes and things in development and is what i use for sorting tasks for all projects. 
-
-[Live Website](https://google.com) - Live website for this project if there is one.
+[Live Website](https://auth.cyrexag.com) - Heres a live version of this site.

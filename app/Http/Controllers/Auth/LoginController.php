@@ -6,8 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
+use League\OAuth2\Server\AuthorizationServer;
+use Nyholm\Psr7\Response as Psr7Response;
+
 class LoginController extends Controller
 {
+    use ConvertsPsrResponses, RetrievesAuthRequestFromSession;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -41,5 +46,42 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('auth.login');
+    }
+
+
+    function oauthRedirect() {
+        return Socialite::driver(request()->get('type'))->redirect();
+    }
+    function oauthCallback(Request $request) {
+        if(!in_array(request()->get("type"), ["github"])) {
+            abort(404);
+        }
+        $githubUser = Socialite::driver(request()->get("type"))->user();
+        $user = User::where("email", $githubUser->email)->first();
+        if($user) {
+            $user->update([
+                "github_id" => $githubUser->id
+            ]);
+        } else {
+            return redirect("/register");
+        }
+        // $user = User::updateOrCreate([
+        //     'github.id' => $githubUser->id,
+        // ], [
+        //     'name' => $githubUser->name,
+        //     'email' => $githubUser->email,
+        //     // 'github_token' => $githubUser->token,
+        //     // 'github_refresh_token' => $githubUser->refreshToken,
+        // ]);
+     
+        Auth::login($user);
+
+        $this->assertValidAuthToken($request);
+
+        $authRequest = $this->getAuthRequestFromSession($request);
+
+        return $this->convertResponse(
+            $this->server->completeAuthorizationRequest($authRequest, new Psr7Response)
+        );
     }
 }

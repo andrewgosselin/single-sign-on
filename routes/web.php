@@ -34,35 +34,8 @@ Auth::routes();
 
 
 
-Route::get('/oauth/redirect', function () {
-    return Socialite::driver(request()->get('type'))->redirect();
-});
-Route::get('/oauth/callback', function () {
-    if(!in_array(request()->get("type"), ["github"])) {
-        abort(404);
-    }
-    $githubUser = Socialite::driver(request()->get("type"))->user();
-    $user = User::where("email", $githubUser->email)->first();
-    if($user) {
-        $user->update([
-            "github_id" => $githubUser->id
-        ]);
-    } else {
-        return redirect("/register");
-    }
-    // $user = User::updateOrCreate([
-    //     'github.id' => $githubUser->id,
-    // ], [
-    //     'name' => $githubUser->name,
-    //     'email' => $githubUser->email,
-    //     // 'github_token' => $githubUser->token,
-    //     // 'github_refresh_token' => $githubUser->refreshToken,
-    // ]);
- 
-    Auth::login($user);
-
-    return redirect("/home");
-});
+Route::get('/oauth/redirect', 'App\Http\Controllers\Auth\LoginController@oauthRedirect');
+Route::get('/oauth/callback', 'App\Http\Controllers\Auth\LoginController@oauthCallback');
 
 // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

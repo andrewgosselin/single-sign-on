@@ -6,8 +6,26 @@
 
 An open source Laravel based authentication server implementing OAuth 2.0 over users and APIs acrossed a network of websites and applications.
 
-<br>
+## Features
+```
+- Easy integration into any Laravel project.
+- Roles & permissions.
+- Multi-tenant option to house multiple organizations between applications.
+- OAuth 2.0.
+- Uses passport for a more secure and maintained oauth.
+- User profiles.
+- Admin panel.
+```
 
+## To do
+```
+- API Authentication.
+- Demo account.
+- Documentation.
+- Electron/node.js bridge package and integration.
+- Normal php bridge package and integration.
+- Global project and organization variables.
+```
 ## Links
 
 [Live Website](https://auth.cyrexag.com) - Heres a live version of this site.

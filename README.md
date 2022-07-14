@@ -6,6 +6,8 @@
 
 An open source Laravel based authentication server implementing OAuth 2.0 over users and APIs acrossed a network of websites and applications.
 
+On each client/application you want to connect you must install my custom Laravel package <a href="https://github.com/andrewgosselin/sso-package">here</a>. (More integrations to other frameworks coming later)
+
 ## Features
 ```
 - Easy integration into any Laravel project.
